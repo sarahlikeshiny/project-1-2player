@@ -26,13 +26,20 @@
   </header>
 
   <main>
+    <div id="instructions">
+    </div>
+    <div>
+      <form class="wordInput" action="index.html" method="post">
+        <textarea id="userword" name="userSecretWord" rows="1" cols="5" ></textarea>
+      </form>
+    </div>
     <div class = "left">
       <form class="gameboard" action="index.html" method="post">
-        <textarea name="userInput" rows="1" cols="5" maxlength="1" ></textarea>
+        <textarea id="userguesses" name="userInput" rows="1" cols="5" maxlength="1" ></textarea>
       </form>
         <h2 id="timer"></h2>
         <h2 class="incorrect"></h2>
-        <h2 id="word" class ="animated bounceInLeft"> the word goes here</h2>
+        <h2 id="word" class ="animated bounceInLeft"></h2>
         <div id ="error" >
         </div>
     </div>
@@ -42,9 +49,8 @@
   </main>
     </div>
 
-
   <footer>
-    <h3>Made with &hearts; by <a  href="#">Sarah</a> at GA London </h3>
+    <h3>Made with &hearts; by <a  href="http://www.sarahlikeshiny.co.uk">Sarah</a> at GA London </h3>
     <!-- <img class = "logo" src="images/GA Logo.png" alt="ga logo"> -->
   </footer>
 

@@ -1,12 +1,14 @@
 console.log('js is connected - woo');
-//to do;
- // don;t allow any more entries after game over - disable not working?.
+
+
+
 $(() => {
 
 //---------------global constants--------------------------
-  const words = ['cat', 'dog', 'horse', 'penguin', 'monkey'];
+  // const words = ['cat', 'dog', 'horse', 'penguin', 'monkey'];
+  const $userWord=$('#userword');
   const $displayWord =$('#word');
-  const $inputText =$('textarea');
+  const $inputText =$('#userguesses');
   const $incorrectGuess=$('.incorrect');
   const $reset=$('#reset');
   const $picture = $('img');
@@ -25,7 +27,7 @@ $(() => {
     'step-six.png',
     'step-seven.png'
   ];
-
+  let turns = 0;
 
 // ------------New Game----------------------------
   $reset.on('click', function () {
@@ -36,15 +38,35 @@ $(() => {
   $timedMode.on('click', countDown);
 
 //---------------select word from array at random-------------------------
-  const currentWord = words[Math.floor(Math.random() * words.length)];
+  // const currentWord = words[Math.floor(Math.random() * words.length)];
 
-//-------------------create underscores for display------------------------
-  const underScores = currentWord.replace(/[a-z]/g, ' _');
-  $displayWord.text(underScores);
-  const underScoresNoWhite = underScores.replace(/\s/g, '');
+//--------------player enters word-------------------------------------------
+  if (turns === 0) {
+    $error.text('player 1 please enter your secret word');
+  } else {
+    $error.text('player 2 please enter your secret word');
+  }
+//get word from box, make into underscores----------------------------------
+  let currentWord = '';
+  let correctChars = [];
+
+  $userWord.on('keyup', function (e) {
+    if (e.keyCode === 13) {
+      currentWord = $userWord.val();
+      $error.text();
+      $userWord.hide();
+      const underScores = currentWord.replace(/[a-z]/g, ' _');
+      $displayWord.text(underScores);
+      const underScoresNoWhite = underScores.replace(/\s/g, '');
+      correctChars = underScoresNoWhite.split('');
+      $error.text('');
+    }
+    return currentWord, correctChars;
+  });
 
 
 //--------------listen to text area for return keypress and grab letter-------
+//if turns - 0 message player 2 make your guesses, if turns = 1, player 1 make your guess
   let userLetter = '';
 
   $inputText.on('keyup', function (e){
@@ -62,18 +84,18 @@ $(() => {
     }
   });
 
+
   const indices = [];
-  const correctChars = underScoresNoWhite.split('');
   const incorrectChars = [];
 
-  // -------------Check is word contains guessed letter----------------
+  // -------------Check if word contains guessed letter----------------
   function checkMatch (){
-    for(var i=0; i<correctChars.length;i++) {
-      if (currentWord[i] === userLetter) {
-        indices.push(i);
+    for(let i=0; i<=correctChars.length; i++) {
+      if (currentWord[i] === userLetter) {//check to see which index of the currentword the user letter is at.
+        indices.push(i);//push the index into an array
         correctChars[i] = userLetter;
-        $inputText.val('');
-        correctCharsSpace = correctChars.join(' ');
+        $inputText.val('');//resets text box
+        correctCharsSpace = correctChars.join(' ');//makes a string from the correctChars array, including any correct chars that have been added.
         $displayWord.text(correctCharsSpace);
       }
     }
@@ -86,11 +108,14 @@ $(() => {
 
 
 // -----------------win lose condition--------------
+//need to set up player 1 player 2 swap condition, and keep score. 
   function winLose () {
     if (indices.length === currentWord.length) {
+      // if turns === 0 player 1 one wins add score to array, if turns === 1 then compare array player one and array player two.
       $error.text('You Win!');
       $error.addClass('animated tada');
       $inputText.attr('disabled', true);
+      turns ++;
     } else {
       const image = `images/${images[incorrectChars.length]}`;
       $picture.attr('src', image);
@@ -98,10 +123,11 @@ $(() => {
         $error.text('Sorry You Lose');
         $error.addClass('animated tada');
         $inputText.attr('disabled', true);
+        turns ++;
       }
     }
   }
-
+//start game again for player 2 - if turns === 0 then clear and start again, else compare scores- need to store scores.
   //------------check for repeated letters
   function checkRepeat() {
     if ((correctChars.length > 1 || incorrectChars.length >1) && correctChars.includes(userLetter) || incorrectChars.includes(userLetter)){
