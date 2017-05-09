@@ -28,6 +28,8 @@ $(() => {
     'step-seven.png'
   ];
   let turns = 0;
+  console.log('turns', turns);
+
 
 // ------------New Game----------------------------
   $reset.on('click', function () {
@@ -37,15 +39,14 @@ $(() => {
   $timedMode.on('click', startStopTimer);
   $timedMode.on('click', countDown);
 
-//---------------select word from array at random-------------------------
-  // const currentWord = words[Math.floor(Math.random() * words.length)];
+//-------------message to player---------------------------------------------
+
+  $error.text('player 1 enter your secret word');
+  $incorrectGuess.text('player 2 enter your guesses');
+
+
 
 //--------------player enters word-------------------------------------------
-  if (turns === 0) {
-    $error.text('player 1 please enter your secret word');
-  } else {
-    $error.text('player 2 please enter your secret word');
-  }
 //get word from box, make into underscores----------------------------------
   let currentWord = '';
   let correctChars = [];
@@ -85,8 +86,8 @@ $(() => {
   });
 
 
-  const indices = [];
-  const incorrectChars = [];
+  let indices = [];
+  let incorrectChars = [];
 
   // -------------Check if word contains guessed letter----------------
   function checkMatch (){
@@ -108,14 +109,18 @@ $(() => {
 
 
 // -----------------win lose condition--------------
-//need to set up player 1 player 2 swap condition, and keep score. 
+//need to set up player 1 player 2 swap condition, and keep score.
+
   function winLose () {
     if (indices.length === currentWord.length) {
-      // if turns === 0 player 1 one wins add score to array, if turns === 1 then compare array player one and array player two.
+      console.log('turns', turns);
       $error.text('You Win!');
       $error.addClass('animated tada');
       $inputText.attr('disabled', true);
       turns ++;
+      incorrectChars=[];
+      indices = [];
+      console.log('turns', turns);
     } else {
       const image = `images/${images[incorrectChars.length]}`;
       $picture.attr('src', image);
@@ -123,12 +128,27 @@ $(() => {
         $error.text('Sorry You Lose');
         $error.addClass('animated tada');
         $inputText.attr('disabled', true);
+        incorrectChars=[];
+        indices = [];
         turns ++;
       }
     }
+    if (turns === 1) {//problem is that everytime turns === 1 this runs, need to it just be just when won or lost??
+      $error.text('player 2 enter your secret word');
+      $incorrectGuess.text('player 1 enter your guesses');
+      $userWord.show();
+      $userWord.val('');
+      $displayWord.text('');
+      $inputText.attr('disabled', false);
+      turns = 2;
+    } if (turns > 2){
+      $error.text('game over');
+      turns = 0;
+    }
   }
-//start game again for player 2 - if turns === 0 then clear and start again, else compare scores- need to store scores.
-  //------------check for repeated letters
+
+  //now need to keep score! 
+//---check for repeated letters
   function checkRepeat() {
     if ((correctChars.length > 1 || incorrectChars.length >1) && correctChars.includes(userLetter) || incorrectChars.includes(userLetter)){
       $error.text('that letter has already been guessed');

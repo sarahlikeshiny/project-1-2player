@@ -103,7 +103,7 @@ h2 {
 
 #error {
   text-align: center;
-  font-size:50px;
+  font-size:30px;
   font-family: 'Bungee', cursive;
   -webkit-text-stroke-color: white;
   -webkit-text-stroke-width: 1px;
@@ -143,8 +143,11 @@ h2 {
   font-family: 'Bungee', cursive;
   font-size: 20px;
 }
-textarea:hover {
+#userguesses:hover {
   background-color: rgba(128, 0, 42,0.5);
+}
+#guessletter {
+  margin-top: 70%;
 }
 button {
   padding:10px;
@@ -184,11 +187,14 @@ button:hover {
   width: 400px;
   padding:20px;
   border: 1px solid white;
-  /*background-color: rgba(128,128,128,0.2);*/
-  background-color: pink;
+  background-color: rgba(128,128,128,0.2);
+  /*background-color: pink;*/
   color:white;
   font-family: 'Bungee', cursive;
   font-size: 20px;
+}
+#userword:hover {
+  background-color: rgba(128, 0, 42,0.5);
 }
 /*----------------------------footer-----------------------------*/
 footer {
