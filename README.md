@@ -8,20 +8,20 @@
 
 * This game is built in HTML5, CSS and Javascript with jQuery.
 * Animation was created using the Animate.css style sheet.
-* The game is deployed via Heroku. (https://frozen-journey-66349.herokuapp.com/)
+* The game is deployed via Heroku. ()
 * The google web font 'Bungee' was used to style the game.
 
 This is a browser hosted version of the game, for optimal functionality Google Chrome is recommended.
 
 <h3> Instructions for Play</h3>
-This version of hangman has two play modes, the standard mode, which started automatically when the page loads, and speed mode which is started by clicking the speed mode button. Clicking the New Game button will reset the game board, clicking the speed mode button will start the timer.
+This second version of the hangman game has been updated to create a two player game, player one enters a word, and player two must enter letters in order to guess this word. After player two has completed their guesses the turns swap. The game ends once each player has taken a turn at guessing the word. Additionally the game has a speed mode which is started by clicking the speed mode button. Clicking the New Game button will reset the game board, clicking the speed mode button will start the timer.
 
 ![](images/start-screen.png)
 
 ***The standard game is played as follows;***
 
-1. A word is generated at random from a list and is displayed on the screen as underscores.
-2. The user guesses a letter by typing the guess into the text box and pressing enter
+1. A word is entered by a user by typing the word into the text box and pressing enter.
+2. The second user guesses a letter by typing the guess into the text box and pressing enter
 3. Correct answers will be displayed in their correct position in the word, incorrect answers will be displayed below the input box and a part of the man will be drawn
 4. If the man is drawn before the word is guessed you lose (7 guesses)
 5. If the word is guessed before the man is drawn you win!

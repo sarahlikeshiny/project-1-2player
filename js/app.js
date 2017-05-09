@@ -10,6 +10,7 @@ $(() => {
   const $displayWord =$('#word');
   const $inputText =$('#userguesses');
   const $incorrectGuess=$('.incorrect');
+  const $winLose = $('#winlose');
   const $reset=$('#reset');
   const $picture = $('img');
   const $timedMode= $('#timed');
@@ -43,6 +44,9 @@ $(() => {
 
   $error.text('player 1 enter your secret word');
   $incorrectGuess.text('player 2 enter your guesses');
+  setTimeout(function(){
+    $incorrectGuess.text('');
+  }, 2000);
 
 
 
@@ -114,8 +118,12 @@ $(() => {
   function winLose () {
     if (indices.length === currentWord.length) {
       console.log('turns', turns);
-      $error.text('You Win!');
-      $error.addClass('animated tada');
+      $winLose.text('You Win!');
+      $winLose.addClass('animated tada');
+      setTimeout(function(){
+        $error.text('');
+        $winLose.text('');
+      }, 2000);
       $inputText.attr('disabled', true);
       turns ++;
       incorrectChars=[];
@@ -125,7 +133,7 @@ $(() => {
       const image = `images/${images[incorrectChars.length]}`;
       $picture.attr('src', image);
       if(incorrectChars.length === 7) {
-        $error.text('Sorry You Lose');
+        $winLose.text('Sorry You Lose');
         $error.addClass('animated tada');
         $inputText.attr('disabled', true);
         incorrectChars=[];
@@ -133,9 +141,12 @@ $(() => {
         turns ++;
       }
     }
-    if (turns === 1) {//problem is that everytime turns === 1 this runs, need to it just be just when won or lost??
+    if (turns === 1) {
       $error.text('player 2 enter your secret word');
       $incorrectGuess.text('player 1 enter your guesses');
+      setTimeout(function(){
+        $incorrectGuess.text('');
+      }, 2000);
       $userWord.show();
       $userWord.val('');
       $displayWord.text('');
@@ -147,7 +158,8 @@ $(() => {
     }
   }
 
-  //now need to keep score! 
+  //now need to keep score!
+
 //---check for repeated letters
   function checkRepeat() {
     if ((correctChars.length > 1 || incorrectChars.length >1) && correctChars.includes(userLetter) || incorrectChars.includes(userLetter)){
