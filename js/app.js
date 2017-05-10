@@ -71,7 +71,7 @@ $(() => {
 
 
 //--------------listen to text area for return keypress and grab letter-------
-//if turns - 0 message player 2 make your guesses, if turns = 1, player 1 make your guess
+
   let userLetter = '';
 
   $inputText.on('keyup', function (e){
@@ -113,7 +113,7 @@ $(() => {
 
 
 // -----------------win lose condition--------------
-//need to set up player 1 player 2 swap condition, and keep score.
+//add logic to state which player won.
 
   function winLose () {
     if (indices.length === currentWord.length) {

@@ -8,7 +8,7 @@
 
 * This game is built in HTML5, CSS and Javascript with jQuery.
 * Animation was created using the Animate.css style sheet.
-* The game is deployed via Heroku. ()
+* The game is deployed via Heroku. (https://peaceful-depths-56722.herokuapp.com/)
 * The google web font 'Bungee' was used to style the game.
 
 This is a browser hosted version of the game, for optimal functionality Google Chrome is recommended.
@@ -16,7 +16,7 @@ This is a browser hosted version of the game, for optimal functionality Google C
 <h3> Instructions for Play</h3>
 This second version of the hangman game has been updated to create a two player game, player one enters a word, and player two must enter letters in order to guess this word. After player two has completed their guesses the turns swap. The game ends once each player has taken a turn at guessing the word. Additionally the game has a speed mode which is started by clicking the speed mode button. Clicking the New Game button will reset the game board, clicking the speed mode button will start the timer.
 
-![](images/start-screen.png)
+![](images/hangmanV2Screenshot.png)
 
 ***The standard game is played as follows;***
 
@@ -28,7 +28,6 @@ This second version of the hangman game has been updated to create a two player 
 
 ***Speed mode is played as follows***
 
-![](images/speed-mode-game-play.png)
 
 1. Clicking the new game button and then the speed mode button starts speed mode.
 2. You have 35 seconds to guess the word or the man will hang!
